@@ -42,7 +42,10 @@ async function userRegisterController(req, res) {
 
         res.cookie("token", token);
 
-        await emailService.sendRegistrationEmail(user.email, user.name);
+        // Send email asynchronously in background so SMTP timeouts don't block registration
+        emailService.sendRegistrationEmail(user.email, user.name).catch(err => {
+            console.error("Background Email Error:", err.message);
+        });
 
         return res.status(201).json({
             user: {

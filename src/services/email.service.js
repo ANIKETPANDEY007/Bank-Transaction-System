@@ -10,6 +10,9 @@ const transporter = nodemailer.createTransport({
     clientSecret: process.env.CLIENT_SECRET,
     refreshToken: process.env.REFRESH_TOKEN,
   },
+  connectionTimeout: 5000,
+  greetingTimeout: 5000,
+  socketTimeout: 5000,
 });
 
 // Verify the connection configuration

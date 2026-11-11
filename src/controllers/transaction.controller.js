@@ -158,15 +158,17 @@ async function createTransaction(req, res) {
         session.endSession();
 
         /**
-         * 10. Send Email Notification
+         * 10. Send Email Notification (non-blocking)
          */
         if (fromUserAccount.user?.email) {
-            await emailService.sendTransactionEmail(
+            emailService.sendTransactionEmail(
                 fromUserAccount.user.email,
                 fromUserAccount.user.name || "Customer",
                 amount,
                 toAccount
-            );
+            ).catch(err => {
+                console.error("Background Email Error:", err.message);
+            });
         }
 
         return res.status(201).json({
