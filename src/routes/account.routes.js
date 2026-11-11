@@ -10,6 +10,18 @@ const router = express.Router() ;
  * - Protected Route 
  */
 
-router.post("/",authMiddleware.authMiddleware,accountController.createAccountController)
+router.post("/", authMiddleware.authMiddleware, accountController.createAccountController);
 
-module.exports = router ;
+/**
+ * - GET /api/accounts/
+ * - Get all accounts (open access)
+ */
+router.get("/", accountController.getUserAccountsController);
+
+/**
+ * - GET /api/accounts/balance/:accountId
+ * - Get balance for an account (open access)
+ */
+router.get("/balance/:accountId", accountController.getAccountBalanceController);
+
+module.exports = router;
