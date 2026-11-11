@@ -8,11 +8,11 @@ const tokenBlacklistSchema = new mongoose.Schema({
     },
     blackListedAt:{
         type : Date ,
-        default : Date.now() ,
+        default : Date.now ,
         immutable : true 
     }
 },{
-    timeStamps : true 
+    timestamps : true 
 })
 
 tokenBlacklistSchema.index({createdAt : 1},{expireAfterSeconds : 60*60*24*3})
