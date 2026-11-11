@@ -13,6 +13,14 @@ const transactionRoutes = require("./routes/transaction.routes");
 /** 
 * - Use Routes
 */
+
+app.get("/",(req,res)=>{
+    return res.status(200).json({
+        message:"Welcome to the Bank Transaction System API",
+        status:"success"
+    })
+})
+
 app.use(express.json())
 app.use(cookieParser())
 app.use("/api/auth",authRouter);
